@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Football Championships</title>
+    <style>
+      /* Add your CSS styles here */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .team {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .teamStars {
+        display: flex;
+      }
+      .star {
+        flex: 1 1 200px;
+        max-width: 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="team" class="team">
+      <img src="" alt="Team Logo" width="500" />
+      <span id="teamStars"></span>
+    </div>
+    <script>
+      const teams = [
+        { name: "Fenerbahçe", championships: 28, logo: "fenerbahce.png" },
+        { name: "Beşiktaş", championships: 16, logo: "besiktas.png" },
+        { name: "Galatasaray", championships: 23, logo: "galatasaray.png" },
+        { name: "Trabzonspor", championships: 8, logo: "trabzonspor.png" },
+      ];
+
+      const teamElement = document.getElementById("team");
+      const imgElement = teamElement.querySelector("img");
+      const starSpan = document.getElementById("teamStars");
+
+      function getRandomTeam() {
+        return teams[Math.floor(Math.random() * teams.length)];
+      }
+
+      function displayTeam(team) {
+        imgElement.src = team.logo;
+        imgElement.alt = team.name;
+        starSpan.textContent = team.championships;
+        starSpan.innerHTML = "";
+        for (let i = 0; i < Math.floor(team.championships / 5); i++) {
+          const starImg = document.createElement("img");
+          starImg.classList.add("star");
+          starImg.src = "star.png";
+          starSpan.appendChild(starImg);
+        }
+      }
+
+      teamElement.addEventListener("click", function () {
+        const randomTeam = getRandomTeam();
+        displayTeam(randomTeam);
+      });
+
+      // Initial display of a random team
+      const initialTeam = getRandomTeam();
+      displayTeam(initialTeam);
+    </script>
+  </body>
+</html>
